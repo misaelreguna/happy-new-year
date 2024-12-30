@@ -51,5 +51,9 @@ function animate() {
     });
     requestAnimationFrame(animate);
 }
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 
 animate();
