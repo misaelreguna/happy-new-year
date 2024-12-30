@@ -61,6 +61,7 @@ img {
     cursor: pointer;
     transition: all 0.3s;
     animation: pulse 2s infinite;
+    border-radius: 10px;
 }
 
 .fireworks-btn:hover {
@@ -68,12 +69,22 @@ img {
     color: white;
 }
 
+.fireworks-btn {
+    transition: opacity 0.5s ease;
+}
+
+.fireworks-btn.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Pulsating button effect */
 @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
 }
 
-/* Canvas for fireworks */
+/* Canvas styles */
 canvas {
     position: fixed;
     top: 0;
@@ -83,7 +94,7 @@ canvas {
     z-index: -1;
 }
 
-/* Responsive Design */
+/* Responsive design */
 @media (max-width: 768px) {
     h1 {
         font-size: 28px;
