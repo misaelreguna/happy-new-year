@@ -1,3 +1,4 @@
+// Canvas setup
 const canvas = document.getElementById('fireworks');
 const ctx = canvas.getContext('2d');
 
@@ -5,17 +6,25 @@ function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
-
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
+// Firework array and logic
 const fireworks = [];
+let isFireworksRunning = false;
+
 function startFireworks() {
+    if (isFireworksRunning) return;
+    isFireworksRunning = true;
+
     setInterval(() => {
-        fireworks.push(new Firework());
+        if (fireworks.length < 100) { // Limit the number of fireworks to avoid lag
+            fireworks.push(new Firework());
+        }
     }, 300);
 }
 
+// Firework class
 class Firework {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -26,6 +35,7 @@ class Firework {
         this.vy = Math.random() * 2 - 1;
         this.alpha = 1;
     }
+
     draw() {
         ctx.save();
         ctx.globalAlpha = this.alpha;
@@ -35,25 +45,27 @@ class Firework {
         ctx.fill();
         ctx.restore();
     }
+
     update() {
         this.x += this.vx;
         this.y += this.vy;
-        this.alpha -= 0.01;
+        this.alpha = Math.max(0, this.alpha - 0.01);
     }
 }
 
+// Animation loop
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     fireworks.forEach((fw, index) => {
-        if (fw.alpha <= 0) fireworks.splice(index, 1);
+        if (fw.alpha <= 0) {
+            fireworks.splice(index, 1);
+        }
         fw.update();
         fw.draw();
     });
+
     requestAnimationFrame(animate);
-}
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
 }
 
 animate();

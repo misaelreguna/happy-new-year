@@ -1,3 +1,4 @@
+/* General styles */
 body {
     margin: 0;
     padding: 0;
@@ -23,9 +24,9 @@ body {
     color: white;
 }
 
-.greeting {
-    font-size: 2.7rem;
-    animation: fadeIn 2s ease-out;
+/* Heading and subtext animation */
+.greeting, .subtext {
+    animation: fadeIn 2s ease-out, moveUpDown 2s ease-in-out infinite;
 }
 
 @keyframes fadeIn {
@@ -33,12 +34,18 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes moveUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
 .subtext {
     font-size: 1.2rem;
     margin-top: 10px;
-    animation: fadeIn 3s ease-out;
+    animation-delay: 0.5s;
 }
 
+/* Button styles */
 .fireworks-btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -61,6 +68,7 @@ body {
     50% { transform: scale(1.1); }
 }
 
+/* Canvas for fireworks */
 canvas {
     position: fixed;
     top: 0;
@@ -69,41 +77,26 @@ canvas {
     height: 100%;
     z-index: -1;
 }
-/* Responsiveness for smaller screens */
-@media (max-width: 768px) {
-    body {
-        font-size: 14px; /* Kurangi ukuran font untuk layar kecil */
-        padding: 10px; /* Tambahkan ruang agar lebih nyaman dibaca */
-    }
 
+/* Responsive Design */
+@media (max-width: 768px) {
     h1 {
-        font-size: 28px; /* Kurangi ukuran judul */
-        text-align: center;
+        font-size: 28px;
     }
 
     p {
         font-size: 16px;
-        text-align: center; /* Pusatkan teks untuk layar kecil */
     }
 
     button {
         font-size: 14px;
         padding: 8px 16px;
     }
-
-    canvas {
-        position: absolute; /* Tetap penuhi layar */
-        top: 0;
-        left: 0;
-        width: 100%; /* Sesuaikan dengan lebar layar */
-        height: 100%; /* Sesuaikan dengan tinggi layar */
-    }
 }
 
-/* Additional tweaks for very small screens */
 @media (max-width: 480px) {
     h1 {
-        font-size: 22px; /* Sesuaikan ukuran teks untuk layar super kecil */
+        font-size: 22px;
     }
 
     p {
@@ -114,26 +107,4 @@ canvas {
         font-size: 12px;
         padding: 6px 12px;
     }
-}
-/* Definisikan keyframes untuk animasi gerakan atas-bawah */
-@keyframes moveUpDown {
-    0%, 100% {
-        transform: translateY(0); /* Titik awal dan akhir: tidak bergerak */
-    }
-    50% {
-        transform: translateY(-10px); /* Bergerak ke atas sejauh 10px */
-    }
-}
-
-/* Terapkan animasi ke h1 */
-h1 {
-    animation: moveUpDown 2s ease-in-out infinite;
-    font-size: 36px; /* Pastikan ukurannya proporsional */
-}
-
-/* Terapkan animasi ke p */
-p {
-    animation: moveUpDown 2s ease-in-out infinite;
-    animation-delay: 0.5s; /* Beri jeda animasi agar tidak bergerak bersamaan */
-    font-size: 18px; /* Sesuaikan dengan desain Anda */
 }
